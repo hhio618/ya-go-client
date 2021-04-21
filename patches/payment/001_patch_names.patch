@@ -1,0 +1,966 @@
+diff -r -c target/ya-payment/api_requestor.go pkg/ya-payment/api_requestor.go
+*** target/ya-payment/api_requestor.go	2021-04-18 18:52:53.794978047 +0430
+--- pkg/ya-payment/api_requestor.go	2021-04-18 13:07:23.279964638 +0430
+***************
+*** 917,929 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetDebitNoteRequest struct {
+  	ctx         _context.Context
+  	ApiService  *RequestorApiService
+  	debitNoteId string
+  }
+  
+! func (r RequesterApiGetDebitNoteRequest) Execute() (DebitNote, *_nethttp.Response, error) {
+  	return r.ApiService.GetDebitNoteExecute(r)
+  }
+  
+--- 917,929 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetDebitNoteRequest struct {
+  	ctx         _context.Context
+  	ApiService  *RequestorApiService
+  	debitNoteId string
+  }
+  
+! func (r ApiGetDebitNoteRequest) Execute() (DebitNote, *_nethttp.Response, error) {
+  	return r.ApiService.GetDebitNoteExecute(r)
+  }
+  
+***************
+*** 931,940 ****
+   * GetDebitNote Get Debit Note.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param debitNoteId
+!  * @return RequesterApiGetDebitNoteRequest
+   */
+! func (a *RequestorApiService) GetDebitNote(ctx _context.Context, debitNoteId string) RequesterApiGetDebitNoteRequest {
+! 	return RequesterApiGetDebitNoteRequest{
+  		ApiService:  a,
+  		ctx:         ctx,
+  		debitNoteId: debitNoteId,
+--- 931,940 ----
+   * GetDebitNote Get Debit Note.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param debitNoteId
+!  * @return ApiGetDebitNoteRequest
+   */
+! func (a *RequestorApiService) GetDebitNote(ctx _context.Context, debitNoteId string) ApiGetDebitNoteRequest {
+! 	return ApiGetDebitNoteRequest{
+  		ApiService:  a,
+  		ctx:         ctx,
+  		debitNoteId: debitNoteId,
+***************
+*** 945,951 ****
+   * Execute executes the request
+   * @return DebitNote
+   */
+! func (a *RequestorApiService) GetDebitNoteExecute(r RequesterApiGetDebitNoteRequest) (DebitNote, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 945,951 ----
+   * Execute executes the request
+   * @return DebitNote
+   */
+! func (a *RequestorApiService) GetDebitNoteExecute(r ApiGetDebitNoteRequest) (DebitNote, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 1050,1056 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetDebitNoteEventsRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	timeout        *float32
+--- 1050,1056 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetDebitNoteEventsRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	timeout        *float32
+***************
+*** 1059,1082 ****
+  	appSessionId   *string
+  }
+  
+! func (r RequesterApiGetDebitNoteEventsRequest) Timeout(timeout float32) RequesterApiGetDebitNoteEventsRequest {
+  	r.timeout = &timeout
+  	return r
+  }
+! func (r RequesterApiGetDebitNoteEventsRequest) AfterTimestamp(afterTimestamp time.Time) RequesterApiGetDebitNoteEventsRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r RequesterApiGetDebitNoteEventsRequest) MaxEvents(maxEvents int32) RequesterApiGetDebitNoteEventsRequest {
+  	r.maxEvents = &maxEvents
+  	return r
+  }
+! func (r RequesterApiGetDebitNoteEventsRequest) AppSessionId(appSessionId string) RequesterApiGetDebitNoteEventsRequest {
+  	r.appSessionId = &appSessionId
+  	return r
+  }
+  
+! func (r RequesterApiGetDebitNoteEventsRequest) Execute() ([]DebitNoteEvent, *_nethttp.Response, error) {
+  	return r.ApiService.GetDebitNoteEventsExecute(r)
+  }
+  
+--- 1059,1082 ----
+  	appSessionId   *string
+  }
+  
+! func (r ApiGetDebitNoteEventsRequest) Timeout(timeout float32) ApiGetDebitNoteEventsRequest {
+  	r.timeout = &timeout
+  	return r
+  }
+! func (r ApiGetDebitNoteEventsRequest) AfterTimestamp(afterTimestamp time.Time) ApiGetDebitNoteEventsRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r ApiGetDebitNoteEventsRequest) MaxEvents(maxEvents int32) ApiGetDebitNoteEventsRequest {
+  	r.maxEvents = &maxEvents
+  	return r
+  }
+! func (r ApiGetDebitNoteEventsRequest) AppSessionId(appSessionId string) ApiGetDebitNoteEventsRequest {
+  	r.appSessionId = &appSessionId
+  	return r
+  }
+  
+! func (r ApiGetDebitNoteEventsRequest) Execute() ([]DebitNoteEvent, *_nethttp.Response, error) {
+  	return r.ApiService.GetDebitNoteEventsExecute(r)
+  }
+  
+***************
+*** 1087,1096 ****
+  **NOTE:** The events are persistent, ie. calling the API does not remove the event records from receiving queue.
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return RequesterApiGetDebitNoteEventsRequest
+  */
+! func (a *RequestorApiService) GetDebitNoteEvents(ctx _context.Context) RequesterApiGetDebitNoteEventsRequest {
+! 	return RequesterApiGetDebitNoteEventsRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+--- 1087,1096 ----
+  **NOTE:** The events are persistent, ie. calling the API does not remove the event records from receiving queue.
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return ApiGetDebitNoteEventsRequest
+  */
+! func (a *RequestorApiService) GetDebitNoteEvents(ctx _context.Context) ApiGetDebitNoteEventsRequest {
+! 	return ApiGetDebitNoteEventsRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+***************
+*** 1100,1106 ****
+   * Execute executes the request
+   * @return []DebitNoteEvent
+   */
+! func (a *RequestorApiService) GetDebitNoteEventsExecute(r RequesterApiGetDebitNoteEventsRequest) ([]DebitNoteEvent, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 1100,1106 ----
+   * Execute executes the request
+   * @return []DebitNoteEvent
+   */
+! func (a *RequestorApiService) GetDebitNoteEventsExecute(r ApiGetDebitNoteEventsRequest) ([]DebitNoteEvent, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 1206,1238 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetDebitNotesRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	afterTimestamp *time.Time
+  	maxItems       *int32
+  }
+  
+! func (r RequesterApiGetDebitNotesRequest) AfterTimestamp(afterTimestamp time.Time) RequesterApiGetDebitNotesRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r RequesterApiGetDebitNotesRequest) MaxItems(maxItems int32) RequesterApiGetDebitNotesRequest {
+  	r.maxItems = &maxItems
+  	return r
+  }
+  
+! func (r RequesterApiGetDebitNotesRequest) Execute() ([]DebitNote, *_nethttp.Response, error) {
+  	return r.ApiService.GetDebitNotesExecute(r)
+  }
+  
+  /*
+   * GetDebitNotes Get Debit Notes known by this node (either issued by this Provider or received by this Requestor).
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return RequesterApiGetDebitNotesRequest
+   */
+! func (a *RequestorApiService) GetDebitNotes(ctx _context.Context) RequesterApiGetDebitNotesRequest {
+! 	return RequesterApiGetDebitNotesRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+--- 1206,1238 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetDebitNotesRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	afterTimestamp *time.Time
+  	maxItems       *int32
+  }
+  
+! func (r ApiGetDebitNotesRequest) AfterTimestamp(afterTimestamp time.Time) ApiGetDebitNotesRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r ApiGetDebitNotesRequest) MaxItems(maxItems int32) ApiGetDebitNotesRequest {
+  	r.maxItems = &maxItems
+  	return r
+  }
+  
+! func (r ApiGetDebitNotesRequest) Execute() ([]DebitNote, *_nethttp.Response, error) {
+  	return r.ApiService.GetDebitNotesExecute(r)
+  }
+  
+  /*
+   * GetDebitNotes Get Debit Notes known by this node (either issued by this Provider or received by this Requestor).
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return ApiGetDebitNotesRequest
+   */
+! func (a *RequestorApiService) GetDebitNotes(ctx _context.Context) ApiGetDebitNotesRequest {
+! 	return ApiGetDebitNotesRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+***************
+*** 1242,1248 ****
+   * Execute executes the request
+   * @return []DebitNote
+   */
+! func (a *RequestorApiService) GetDebitNotesExecute(r RequesterApiGetDebitNotesRequest) ([]DebitNote, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 1242,1248 ----
+   * Execute executes the request
+   * @return []DebitNote
+   */
+! func (a *RequestorApiService) GetDebitNotesExecute(r ApiGetDebitNotesRequest) ([]DebitNote, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 1483,1495 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetInvoiceRequest struct {
+  	ctx        _context.Context
+  	ApiService *RequestorApiService
+  	invoiceId  string
+  }
+  
+! func (r RequesterApiGetInvoiceRequest) Execute() (Invoice, *_nethttp.Response, error) {
+  	return r.ApiService.GetInvoiceExecute(r)
+  }
+  
+--- 1483,1495 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetInvoiceRequest struct {
+  	ctx        _context.Context
+  	ApiService *RequestorApiService
+  	invoiceId  string
+  }
+  
+! func (r ApiGetInvoiceRequest) Execute() (Invoice, *_nethttp.Response, error) {
+  	return r.ApiService.GetInvoiceExecute(r)
+  }
+  
+***************
+*** 1497,1506 ****
+   * GetInvoice Get Invoice.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param invoiceId
+!  * @return RequesterApiGetInvoiceRequest
+   */
+! func (a *RequestorApiService) GetInvoice(ctx _context.Context, invoiceId string) RequesterApiGetInvoiceRequest {
+! 	return RequesterApiGetInvoiceRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  		invoiceId:  invoiceId,
+--- 1497,1506 ----
+   * GetInvoice Get Invoice.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param invoiceId
+!  * @return ApiGetInvoiceRequest
+   */
+! func (a *RequestorApiService) GetInvoice(ctx _context.Context, invoiceId string) ApiGetInvoiceRequest {
+! 	return ApiGetInvoiceRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  		invoiceId:  invoiceId,
+***************
+*** 1511,1517 ****
+   * Execute executes the request
+   * @return Invoice
+   */
+! func (a *RequestorApiService) GetInvoiceExecute(r RequesterApiGetInvoiceRequest) (Invoice, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 1511,1517 ----
+   * Execute executes the request
+   * @return Invoice
+   */
+! func (a *RequestorApiService) GetInvoiceExecute(r ApiGetInvoiceRequest) (Invoice, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 1616,1622 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetInvoiceEventsRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	timeout        *float32
+--- 1616,1622 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetInvoiceEventsRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	timeout        *float32
+***************
+*** 1625,1648 ****
+  	appSessionId   *string
+  }
+  
+! func (r RequesterApiGetInvoiceEventsRequest) Timeout(timeout float32) RequesterApiGetInvoiceEventsRequest {
+  	r.timeout = &timeout
+  	return r
+  }
+! func (r RequesterApiGetInvoiceEventsRequest) AfterTimestamp(afterTimestamp time.Time) RequesterApiGetInvoiceEventsRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r RequesterApiGetInvoiceEventsRequest) MaxEvents(maxEvents int32) RequesterApiGetInvoiceEventsRequest {
+  	r.maxEvents = &maxEvents
+  	return r
+  }
+! func (r RequesterApiGetInvoiceEventsRequest) AppSessionId(appSessionId string) RequesterApiGetInvoiceEventsRequest {
+  	r.appSessionId = &appSessionId
+  	return r
+  }
+  
+! func (r RequesterApiGetInvoiceEventsRequest) Execute() ([]InvoiceEvent, *_nethttp.Response, error) {
+  	return r.ApiService.GetInvoiceEventsExecute(r)
+  }
+  
+--- 1625,1648 ----
+  	appSessionId   *string
+  }
+  
+! func (r ApiGetInvoiceEventsRequest) Timeout(timeout float32) ApiGetInvoiceEventsRequest {
+  	r.timeout = &timeout
+  	return r
+  }
+! func (r ApiGetInvoiceEventsRequest) AfterTimestamp(afterTimestamp time.Time) ApiGetInvoiceEventsRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r ApiGetInvoiceEventsRequest) MaxEvents(maxEvents int32) ApiGetInvoiceEventsRequest {
+  	r.maxEvents = &maxEvents
+  	return r
+  }
+! func (r ApiGetInvoiceEventsRequest) AppSessionId(appSessionId string) ApiGetInvoiceEventsRequest {
+  	r.appSessionId = &appSessionId
+  	return r
+  }
+  
+! func (r ApiGetInvoiceEventsRequest) Execute() ([]InvoiceEvent, *_nethttp.Response, error) {
+  	return r.ApiService.GetInvoiceEventsExecute(r)
+  }
+  
+***************
+*** 1653,1662 ****
+  **NOTE:** The events are persistent, ie. calling the API does not remove the event records from receiving queue.
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return RequesterApiGetInvoiceEventsRequest
+  */
+! func (a *RequestorApiService) GetInvoiceEvents(ctx _context.Context) RequesterApiGetInvoiceEventsRequest {
+! 	return RequesterApiGetInvoiceEventsRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+--- 1653,1662 ----
+  **NOTE:** The events are persistent, ie. calling the API does not remove the event records from receiving queue.
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return ApiGetInvoiceEventsRequest
+  */
+! func (a *RequestorApiService) GetInvoiceEvents(ctx _context.Context) ApiGetInvoiceEventsRequest {
+! 	return ApiGetInvoiceEventsRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+***************
+*** 1666,1672 ****
+   * Execute executes the request
+   * @return []InvoiceEvent
+   */
+! func (a *RequestorApiService) GetInvoiceEventsExecute(r RequesterApiGetInvoiceEventsRequest) ([]InvoiceEvent, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 1666,1672 ----
+   * Execute executes the request
+   * @return []InvoiceEvent
+   */
+! func (a *RequestorApiService) GetInvoiceEventsExecute(r ApiGetInvoiceEventsRequest) ([]InvoiceEvent, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 1772,1804 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetInvoicesRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	afterTimestamp *time.Time
+  	maxItems       *int32
+  }
+  
+! func (r RequesterApiGetInvoicesRequest) AfterTimestamp(afterTimestamp time.Time) RequesterApiGetInvoicesRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r RequesterApiGetInvoicesRequest) MaxItems(maxItems int32) RequesterApiGetInvoicesRequest {
+  	r.maxItems = &maxItems
+  	return r
+  }
+  
+! func (r RequesterApiGetInvoicesRequest) Execute() ([]Invoice, *_nethttp.Response, error) {
+  	return r.ApiService.GetInvoicesExecute(r)
+  }
+  
+  /*
+   * GetInvoices Get Invoices known to this node (either issued by this Provider or received by this Requestor).
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return RequesterApiGetInvoicesRequest
+   */
+! func (a *RequestorApiService) GetInvoices(ctx _context.Context) RequesterApiGetInvoicesRequest {
+! 	return RequesterApiGetInvoicesRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+--- 1772,1804 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetInvoicesRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	afterTimestamp *time.Time
+  	maxItems       *int32
+  }
+  
+! func (r ApiGetInvoicesRequest) AfterTimestamp(afterTimestamp time.Time) ApiGetInvoicesRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r ApiGetInvoicesRequest) MaxItems(maxItems int32) ApiGetInvoicesRequest {
+  	r.maxItems = &maxItems
+  	return r
+  }
+  
+! func (r ApiGetInvoicesRequest) Execute() ([]Invoice, *_nethttp.Response, error) {
+  	return r.ApiService.GetInvoicesExecute(r)
+  }
+  
+  /*
+   * GetInvoices Get Invoices known to this node (either issued by this Provider or received by this Requestor).
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return ApiGetInvoicesRequest
+   */
+! func (a *RequestorApiService) GetInvoices(ctx _context.Context) ApiGetInvoicesRequest {
+! 	return ApiGetInvoicesRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+***************
+*** 1808,1814 ****
+   * Execute executes the request
+   * @return []Invoice
+   */
+! func (a *RequestorApiService) GetInvoicesExecute(r RequesterApiGetInvoicesRequest) ([]Invoice, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 1808,1814 ----
+   * Execute executes the request
+   * @return []Invoice
+   */
+! func (a *RequestorApiService) GetInvoicesExecute(r ApiGetInvoicesRequest) ([]Invoice, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 1908,1920 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetPaymentRequest struct {
+  	ctx        _context.Context
+  	ApiService *RequestorApiService
+  	paymentId  string
+  }
+  
+! func (r RequesterApiGetPaymentRequest) Execute() (Payment, *_nethttp.Response, error) {
+  	return r.ApiService.GetPaymentExecute(r)
+  }
+  
+--- 1908,1920 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetPaymentRequest struct {
+  	ctx        _context.Context
+  	ApiService *RequestorApiService
+  	paymentId  string
+  }
+  
+! func (r ApiGetPaymentRequest) Execute() (Payment, *_nethttp.Response, error) {
+  	return r.ApiService.GetPaymentExecute(r)
+  }
+  
+***************
+*** 1922,1931 ****
+   * GetPayment Get Payment.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param paymentId
+!  * @return RequesterApiGetPaymentRequest
+   */
+! func (a *RequestorApiService) GetPayment(ctx _context.Context, paymentId string) RequesterApiGetPaymentRequest {
+! 	return RequesterApiGetPaymentRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  		paymentId:  paymentId,
+--- 1922,1931 ----
+   * GetPayment Get Payment.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param paymentId
+!  * @return ApiGetPaymentRequest
+   */
+! func (a *RequestorApiService) GetPayment(ctx _context.Context, paymentId string) ApiGetPaymentRequest {
+! 	return ApiGetPaymentRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  		paymentId:  paymentId,
+***************
+*** 1936,1942 ****
+   * Execute executes the request
+   * @return Payment
+   */
+! func (a *RequestorApiService) GetPaymentExecute(r RequesterApiGetPaymentRequest) (Payment, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 1936,1942 ----
+   * Execute executes the request
+   * @return Payment
+   */
+! func (a *RequestorApiService) GetPaymentExecute(r ApiGetPaymentRequest) (Payment, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 2041,2047 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetPaymentsRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	timeout        *float32
+--- 2041,2047 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetPaymentsRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	timeout        *float32
+***************
+*** 2050,2073 ****
+  	appSessionId   *string
+  }
+  
+! func (r RequesterApiGetPaymentsRequest) Timeout(timeout float32) RequesterApiGetPaymentsRequest {
+  	r.timeout = &timeout
+  	return r
+  }
+! func (r RequesterApiGetPaymentsRequest) AfterTimestamp(afterTimestamp time.Time) RequesterApiGetPaymentsRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r RequesterApiGetPaymentsRequest) MaxEvents(maxEvents int32) RequesterApiGetPaymentsRequest {
+  	r.maxEvents = &maxEvents
+  	return r
+  }
+! func (r RequesterApiGetPaymentsRequest) AppSessionId(appSessionId string) RequesterApiGetPaymentsRequest {
+  	r.appSessionId = &appSessionId
+  	return r
+  }
+  
+! func (r RequesterApiGetPaymentsRequest) Execute() ([]Payment, *_nethttp.Response, error) {
+  	return r.ApiService.GetPaymentsExecute(r)
+  }
+  
+--- 2050,2073 ----
+  	appSessionId   *string
+  }
+  
+! func (r ApiGetPaymentsRequest) Timeout(timeout float32) ApiGetPaymentsRequest {
+  	r.timeout = &timeout
+  	return r
+  }
+! func (r ApiGetPaymentsRequest) AfterTimestamp(afterTimestamp time.Time) ApiGetPaymentsRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r ApiGetPaymentsRequest) MaxEvents(maxEvents int32) ApiGetPaymentsRequest {
+  	r.maxEvents = &maxEvents
+  	return r
+  }
+! func (r ApiGetPaymentsRequest) AppSessionId(appSessionId string) ApiGetPaymentsRequest {
+  	r.appSessionId = &appSessionId
+  	return r
+  }
+  
+! func (r ApiGetPaymentsRequest) Execute() ([]Payment, *_nethttp.Response, error) {
+  	return r.ApiService.GetPaymentsExecute(r)
+  }
+  
+***************
+*** 2076,2085 ****
+   * Payments can be treated as events and this method can be used to listen for new payments by long-polling.  If there are any payments the method will return them immediately. If there are none the method will wait until one appears or timeout passes. `afterTimestamp` parameter can be used in order to get just the 'new' payments. Setting the parameter value to the timestamp of the last processed payment ensures that no payments will go unnoticed.
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return RequesterApiGetPaymentsRequest
+   */
+! func (a *RequestorApiService) GetPayments(ctx _context.Context) RequesterApiGetPaymentsRequest {
+! 	return RequesterApiGetPaymentsRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+--- 2076,2085 ----
+   * Payments can be treated as events and this method can be used to listen for new payments by long-polling.  If there are any payments the method will return them immediately. If there are none the method will wait until one appears or timeout passes. `afterTimestamp` parameter can be used in order to get just the 'new' payments. Setting the parameter value to the timestamp of the last processed payment ensures that no payments will go unnoticed.
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return ApiGetPaymentsRequest
+   */
+! func (a *RequestorApiService) GetPayments(ctx _context.Context) ApiGetPaymentsRequest {
+! 	return ApiGetPaymentsRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+***************
+*** 2089,2095 ****
+   * Execute executes the request
+   * @return []Payment
+   */
+! func (a *RequestorApiService) GetPaymentsExecute(r RequesterApiGetPaymentsRequest) ([]Payment, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 2089,2095 ----
+   * Execute executes the request
+   * @return []Payment
+   */
+! func (a *RequestorApiService) GetPaymentsExecute(r ApiGetPaymentsRequest) ([]Payment, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 2195,2201 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetPaymentsForDebitNoteRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	debitNoteId    string
+--- 2195,2201 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetPaymentsForDebitNoteRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	debitNoteId    string
+***************
+*** 2203,2218 ****
+  	maxItems       *int32
+  }
+  
+! func (r RequesterApiGetPaymentsForDebitNoteRequest) AfterTimestamp(afterTimestamp time.Time) RequesterApiGetPaymentsForDebitNoteRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r RequesterApiGetPaymentsForDebitNoteRequest) MaxItems(maxItems int32) RequesterApiGetPaymentsForDebitNoteRequest {
+  	r.maxItems = &maxItems
+  	return r
+  }
+  
+! func (r RequesterApiGetPaymentsForDebitNoteRequest) Execute() ([]Payment, *_nethttp.Response, error) {
+  	return r.ApiService.GetPaymentsForDebitNoteExecute(r)
+  }
+  
+--- 2203,2218 ----
+  	maxItems       *int32
+  }
+  
+! func (r ApiGetPaymentsForDebitNoteRequest) AfterTimestamp(afterTimestamp time.Time) ApiGetPaymentsForDebitNoteRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r ApiGetPaymentsForDebitNoteRequest) MaxItems(maxItems int32) ApiGetPaymentsForDebitNoteRequest {
+  	r.maxItems = &maxItems
+  	return r
+  }
+  
+! func (r ApiGetPaymentsForDebitNoteRequest) Execute() ([]Payment, *_nethttp.Response, error) {
+  	return r.ApiService.GetPaymentsForDebitNoteExecute(r)
+  }
+  
+***************
+*** 2222,2231 ****
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param debitNoteId
+!  * @return RequesterApiGetPaymentsForDebitNoteRequest
+   */
+! func (a *RequestorApiService) GetPaymentsForDebitNote(ctx _context.Context, debitNoteId string) RequesterApiGetPaymentsForDebitNoteRequest {
+! 	return RequesterApiGetPaymentsForDebitNoteRequest{
+  		ApiService:  a,
+  		ctx:         ctx,
+  		debitNoteId: debitNoteId,
+--- 2222,2231 ----
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param debitNoteId
+!  * @return ApiGetPaymentsForDebitNoteRequest
+   */
+! func (a *RequestorApiService) GetPaymentsForDebitNote(ctx _context.Context, debitNoteId string) ApiGetPaymentsForDebitNoteRequest {
+! 	return ApiGetPaymentsForDebitNoteRequest{
+  		ApiService:  a,
+  		ctx:         ctx,
+  		debitNoteId: debitNoteId,
+***************
+*** 2236,2242 ****
+   * Execute executes the request
+   * @return []Payment
+   */
+! func (a *RequestorApiService) GetPaymentsForDebitNoteExecute(r RequesterApiGetPaymentsForDebitNoteRequest) ([]Payment, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 2236,2242 ----
+   * Execute executes the request
+   * @return []Payment
+   */
+! func (a *RequestorApiService) GetPaymentsForDebitNoteExecute(r ApiGetPaymentsForDebitNoteRequest) ([]Payment, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 2337,2343 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetPaymentsForInvoiceRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	invoiceId      string
+--- 2337,2343 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetPaymentsForInvoiceRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	invoiceId      string
+***************
+*** 2345,2360 ****
+  	maxItems       *int32
+  }
+  
+! func (r RequesterApiGetPaymentsForInvoiceRequest) AfterTimestamp(afterTimestamp time.Time) RequesterApiGetPaymentsForInvoiceRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r RequesterApiGetPaymentsForInvoiceRequest) MaxItems(maxItems int32) RequesterApiGetPaymentsForInvoiceRequest {
+  	r.maxItems = &maxItems
+  	return r
+  }
+  
+! func (r RequesterApiGetPaymentsForInvoiceRequest) Execute() ([]Payment, *_nethttp.Response, error) {
+  	return r.ApiService.GetPaymentsForInvoiceExecute(r)
+  }
+  
+--- 2345,2360 ----
+  	maxItems       *int32
+  }
+  
+! func (r ApiGetPaymentsForInvoiceRequest) AfterTimestamp(afterTimestamp time.Time) ApiGetPaymentsForInvoiceRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r ApiGetPaymentsForInvoiceRequest) MaxItems(maxItems int32) ApiGetPaymentsForInvoiceRequest {
+  	r.maxItems = &maxItems
+  	return r
+  }
+  
+! func (r ApiGetPaymentsForInvoiceRequest) Execute() ([]Payment, *_nethttp.Response, error) {
+  	return r.ApiService.GetPaymentsForInvoiceExecute(r)
+  }
+  
+***************
+*** 2364,2373 ****
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param invoiceId
+!  * @return RequesterApiGetPaymentsForInvoiceRequest
+   */
+! func (a *RequestorApiService) GetPaymentsForInvoice(ctx _context.Context, invoiceId string) RequesterApiGetPaymentsForInvoiceRequest {
+! 	return RequesterApiGetPaymentsForInvoiceRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  		invoiceId:  invoiceId,
+--- 2364,2373 ----
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param invoiceId
+!  * @return ApiGetPaymentsForInvoiceRequest
+   */
+! func (a *RequestorApiService) GetPaymentsForInvoice(ctx _context.Context, invoiceId string) ApiGetPaymentsForInvoiceRequest {
+! 	return ApiGetPaymentsForInvoiceRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  		invoiceId:  invoiceId,
+***************
+*** 2378,2384 ****
+   * Execute executes the request
+   * @return []Payment
+   */
+! func (a *RequestorApiService) GetPaymentsForInvoiceExecute(r RequesterApiGetPaymentsForInvoiceRequest) ([]Payment, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 2378,2384 ----
+   * Execute executes the request
+   * @return []Payment
+   */
+! func (a *RequestorApiService) GetPaymentsForInvoiceExecute(r ApiGetPaymentsForInvoiceRequest) ([]Payment, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 2598,2625 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiIssueInvoiceRequest struct {
+  	ctx        _context.Context
+  	ApiService *RequestorApiService
+  	invoice    *Invoice
+  }
+  
+! func (r RequesterApiIssueInvoiceRequest) Invoice(invoice Invoice) RequesterApiIssueInvoiceRequest {
+  	r.invoice = &invoice
+  	return r
+  }
+  
+! func (r RequesterApiIssueInvoiceRequest) Execute() (Invoice, *_nethttp.Response, error) {
+  	return r.ApiService.IssueInvoiceExecute(r)
+  }
+  
+  /*
+   * IssueInvoice Issue an Invoice.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return RequesterApiIssueInvoiceRequest
+   */
+! func (a *RequestorApiService) IssueInvoice(ctx _context.Context) RequesterApiIssueInvoiceRequest {
+! 	return RequesterApiIssueInvoiceRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+--- 2598,2625 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiIssueInvoiceRequest struct {
+  	ctx        _context.Context
+  	ApiService *RequestorApiService
+  	invoice    *Invoice
+  }
+  
+! func (r ApiIssueInvoiceRequest) Invoice(invoice Invoice) ApiIssueInvoiceRequest {
+  	r.invoice = &invoice
+  	return r
+  }
+  
+! func (r ApiIssueInvoiceRequest) Execute() (Invoice, *_nethttp.Response, error) {
+  	return r.ApiService.IssueInvoiceExecute(r)
+  }
+  
+  /*
+   * IssueInvoice Issue an Invoice.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return ApiIssueInvoiceRequest
+   */
+! func (a *RequestorApiService) IssueInvoice(ctx _context.Context) ApiIssueInvoiceRequest {
+! 	return ApiIssueInvoiceRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+***************
+*** 2629,2635 ****
+   * Execute executes the request
+   * @return Invoice
+   */
+! func (a *RequestorApiService) IssueInvoiceExecute(r RequesterApiIssueInvoiceRequest) (Invoice, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodPost
+  		localVarPostBody     interface{}
+--- 2629,2635 ----
+   * Execute executes the request
+   * @return Invoice
+   */
+! func (a *RequestorApiService) IssueInvoiceExecute(r ApiIssueInvoiceRequest) (Invoice, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodPost
+  		localVarPostBody     interface{}

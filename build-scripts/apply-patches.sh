@@ -7,17 +7,17 @@ fail() {
 	exit 1
 }
 
-echo step 1 cleaning src
+echo step 1 cleaning pkg
 
 set -x
 
-rm -fr src
+rm -fr pkg
 
-echo step 2 move modules into src
-mkdir src
+echo step 2 move modules into pkg
+mkdir pkg
 for name in $MODULES
 do
-  cp -r "target/ya-$name" src/
+  cp -r "target/ya-$name" pkg/
 done
 
 apply_patches() {
@@ -41,4 +41,4 @@ apply_patches() {
 
 }
 echo step 3 apply patches
-apply_patches "src" "$MODULES"
+apply_patches "pkg" "$MODULES"

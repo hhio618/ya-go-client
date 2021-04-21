@@ -16,13 +16,15 @@ m.patch: m.setup
 	touch m.patch
 
 m.build: m.patch
-	cp -r src/* target/
-	cp -r target/* pkg/
-	rm -rf pkg/*.jar
+	cp -r src/* pkg/
 
 clean:
-	find target \! -name 'openapi-generator-cli.jar' -delete
-	rm m.*
+	rm -rf src/*
+	rm -rf pkg/*
+	rm -rf m.*
+	rm -rf go.*
+	find target/* ! -name 'openapi-generator-cli.jar' -delete
+
 
 .PHONY: all
 

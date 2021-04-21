@@ -5,8 +5,8 @@ DEST=$2
 
 test -n "$NAME" || exit 1
 
-if test -n "$DIST"; then
-    diff -r -c "target/ya-$NAME" "src/ya-$NAME" > patches/$DEST
+if test -n "$DEST"; then
+    diff -r -c "target/ya-$NAME" "pkg/ya-$NAME" > patches/$DEST
 else
-    diff -r -c "target/ya-$NAME" "src/ya-$NAME"
+    diff -r -c "target/ya-$NAME" "pkg/ya-$NAME"
 fi

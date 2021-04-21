@@ -1,0 +1,189 @@
+diff -r -c target/ya-activity/api_provider.go pkg/ya-activity/api_provider.go
+*** target/ya-activity/api_provider.go	2021-04-18 13:09:43.353551073 +0430
+--- pkg/ya-activity/api_provider.go	2021-04-18 13:07:23.019928086 +0430
+***************
+*** 180,192 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ProviderApiGetActivityStateRequest struct {
+  	ctx        _context.Context
+  	ApiService *ProviderApiService
+  	activityId string
+  }
+  
+! func (r ProviderApiGetActivityStateRequest) Execute() (ActivityState, *_nethttp.Response, error) {
+  	return r.ApiService.GetActivityStateExecute(r)
+  }
+  
+--- 180,192 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetActivityStateRequest struct {
+  	ctx        _context.Context
+  	ApiService *ProviderApiService
+  	activityId string
+  }
+  
+! func (r ApiGetActivityStateRequest) Execute() (ActivityState, *_nethttp.Response, error) {
+  	return r.ApiService.GetActivityStateExecute(r)
+  }
+  
+***************
+*** 194,203 ****
+   * GetActivityState Get state of specified Activity.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param activityId
+!  * @return ProviderApiGetActivityStateRequest
+   */
+! func (a *ProviderApiService) GetActivityState(ctx _context.Context, activityId string) ProviderApiGetActivityStateRequest {
+! 	return ProviderApiGetActivityStateRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  		activityId: activityId,
+--- 194,203 ----
+   * GetActivityState Get state of specified Activity.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param activityId
+!  * @return ApiGetActivityStateRequest
+   */
+! func (a *ProviderApiService) GetActivityState(ctx _context.Context, activityId string) ApiGetActivityStateRequest {
+! 	return ApiGetActivityStateRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  		activityId: activityId,
+***************
+*** 208,214 ****
+   * Execute executes the request
+   * @return ActivityState
+   */
+! func (a *ProviderApiService) GetActivityStateExecute(r ProviderApiGetActivityStateRequest) (ActivityState, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 208,214 ----
+   * Execute executes the request
+   * @return ActivityState
+   */
+! func (a *ProviderApiService) GetActivityStateExecute(r ApiGetActivityStateRequest) (ActivityState, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 303,316 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+  /*
+   * GetActivityUsage Get usage of specified Activity.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param activityId
+!  * @return ProviderApiGetActivityStateRequest
+   */
+! func (a *ProviderApiService) GetActivityUsage(ctx _context.Context, activityId string) ProviderApiGetActivityStateRequest {
+! 	return ProviderApiGetActivityStateRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  		activityId: activityId,
+--- 303,326 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
++ type ApiGetActivityUsageRequest struct {
++ 	ctx        _context.Context
++ 	ApiService *ProviderApiService
++ 	activityId string
++ }
++ 
++ func (r ApiGetActivityUsageRequest) Execute() (ActivityUsage, *_nethttp.Response, error) {
++ 	return r.ApiService.GetActivityUsageExecute(r)
++ }
++ 
+  /*
+   * GetActivityUsage Get usage of specified Activity.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param activityId
+!  * @return ApiGetActivityUsageRequest
+   */
+! func (a *ProviderApiService) GetActivityUsage(ctx _context.Context, activityId string) ApiGetActivityUsageRequest {
+! 	return ApiGetActivityUsageRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  		activityId: activityId,
+diff -r -c target/ya-activity/api_requestor_control.go pkg/ya-activity/api_requestor_control.go
+*** target/ya-activity/api_requestor_control.go	2021-04-18 13:10:19.169443001 +0430
+--- pkg/ya-activity/api_requestor_control.go	2021-04-18 13:07:23.019928086 +0430
+***************
+*** 165,175 ****
+  type ApiCreateActivityRequest struct {
+  	ctx         _context.Context
+  	ApiService  *RequestorControlApiService
+! 	agreementId interface{}
+  	timeout     *float32
+  }
+  
+! func (r ApiCreateActivityRequest) AgreementId(agreementId interface{}) ApiCreateActivityRequest {
+  	r.agreementId = &agreementId
+  	return r
+  }
+--- 165,175 ----
+  type ApiCreateActivityRequest struct {
+  	ctx         _context.Context
+  	ApiService  *RequestorControlApiService
+! 	agreementId *UNKNOWN_BASE_TYPE
+  	timeout     *float32
+  }
+  
+! func (r ApiCreateActivityRequest) AgreementId(agreementId UNKNOWN_BASE_TYPE) ApiCreateActivityRequest {
+  	r.agreementId = &agreementId
+  	return r
+  }
+***************
+*** 178,184 ****
+  	return r
+  }
+  
+! func (r ApiCreateActivityRequest) Execute() (interface{}, *_nethttp.Response, error) {
+  	return r.ApiService.CreateActivityExecute(r)
+  }
+  
+--- 178,184 ----
+  	return r
+  }
+  
+! func (r ApiCreateActivityRequest) Execute() (OneOfstringCreateActivityResult, *_nethttp.Response, error) {
+  	return r.ApiService.CreateActivityExecute(r)
+  }
+  
+***************
+*** 199,212 ****
+   * Execute executes the request
+   * @return OneOfstringCreateActivityResult
+   */
+! func (a *RequestorControlApiService) CreateActivityExecute(r ApiCreateActivityRequest) (interface{}, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodPost
+  		localVarPostBody     interface{}
+  		localVarFormFileName string
+  		localVarFileName     string
+  		localVarFileBytes    []byte
+! 		localVarReturnValue  interface{}
+  	)
+  
+  	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RequestorControlApiService.CreateActivity")
+--- 199,212 ----
+   * Execute executes the request
+   * @return OneOfstringCreateActivityResult
+   */
+! func (a *RequestorControlApiService) CreateActivityExecute(r ApiCreateActivityRequest) (OneOfstringCreateActivityResult, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodPost
+  		localVarPostBody     interface{}
+  		localVarFormFileName string
+  		localVarFileName     string
+  		localVarFileBytes    []byte
+! 		localVarReturnValue  OneOfstringCreateActivityResult
+  	)
+  
+  	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RequestorControlApiService.CreateActivity")

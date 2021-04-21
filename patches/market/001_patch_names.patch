@@ -1,0 +1,264 @@
+diff -r -c target/ya-market/api_provider.go pkg/ya-market/api_provider.go
+*** target/ya-market/api_provider.go	2021-04-18 18:49:08.326845793 +0430
+--- pkg/ya-market/api_provider.go	2021-04-18 13:07:23.127943269 +0430
+***************
+*** 1659,1677 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiTerminateAgreementRequest struct {
+  	ctx         _context.Context
+  	ApiService  *ProviderApiService
+  	agreementId string
+  	requestBody *map[string]interface{}
+  }
+  
+! func (r RequesterApiTerminateAgreementRequest) RequestBody(requestBody map[string]interface{}) RequesterApiTerminateAgreementRequest {
+  	r.requestBody = &requestBody
+  	return r
+  }
+  
+! func (r RequesterApiTerminateAgreementRequest) Execute() (*_nethttp.Response, error) {
+  	return r.ApiService.TerminateAgreementExecute(r)
+  }
+  
+--- 1659,1677 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiTerminateAgreementRequest struct {
+  	ctx         _context.Context
+  	ApiService  *ProviderApiService
+  	agreementId string
+  	requestBody *map[string]interface{}
+  }
+  
+! func (r ApiTerminateAgreementRequest) RequestBody(requestBody map[string]interface{}) ApiTerminateAgreementRequest {
+  	r.requestBody = &requestBody
+  	return r
+  }
+  
+! func (r ApiTerminateAgreementRequest) Execute() (*_nethttp.Response, error) {
+  	return r.ApiService.TerminateAgreementExecute(r)
+  }
+  
+***************
+*** 1687,1696 ****
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param agreementId
+!  * @return RequesterApiTerminateAgreementRequest
+  */
+! func (a *ProviderApiService) TerminateAgreement(ctx _context.Context, agreementId string) RequesterApiTerminateAgreementRequest {
+! 	return RequesterApiTerminateAgreementRequest{
+  		ApiService:  a,
+  		ctx:         ctx,
+  		agreementId: agreementId,
+--- 1687,1696 ----
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param agreementId
+!  * @return ApiTerminateAgreementRequest
+  */
+! func (a *ProviderApiService) TerminateAgreement(ctx _context.Context, agreementId string) ApiTerminateAgreementRequest {
+! 	return ApiTerminateAgreementRequest{
+  		ApiService:  a,
+  		ctx:         ctx,
+  		agreementId: agreementId,
+***************
+*** 1700,1706 ****
+  /*
+   * Execute executes the request
+   */
+! func (a *ProviderApiService) TerminateAgreementExecute(r RequesterApiTerminateAgreementRequest) (*_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodPost
+  		localVarPostBody     interface{}
+--- 1700,1706 ----
+  /*
+   * Execute executes the request
+   */
+! func (a *ProviderApiService) TerminateAgreementExecute(r ApiTerminateAgreementRequest) (*_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodPost
+  		localVarPostBody     interface{}
+diff -r -c target/ya-market/api_requestor.go pkg/ya-market/api_requestor.go
+*** target/ya-market/api_requestor.go	2021-04-18 18:48:07.458931447 +0430
+--- pkg/ya-market/api_requestor.go	2021-04-18 13:07:23.131943831 +0430
+***************
+*** 172,178 ****
+  	return localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiCollectAgreementEventsRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	timeout        *float32
+--- 172,178 ----
+  	return localVarHTTPResponse, nil
+  }
+  
+! type ApiCollectAgreementEventsRequest struct {
+  	ctx            _context.Context
+  	ApiService     *RequestorApiService
+  	timeout        *float32
+***************
+*** 181,204 ****
+  	appSessionId   *string
+  }
+  
+! func (r RequesterApiCollectAgreementEventsRequest) Timeout(timeout float32) RequesterApiCollectAgreementEventsRequest {
+  	r.timeout = &timeout
+  	return r
+  }
+! func (r RequesterApiCollectAgreementEventsRequest) AfterTimestamp(afterTimestamp time.Time) RequesterApiCollectAgreementEventsRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r RequesterApiCollectAgreementEventsRequest) MaxEvents(maxEvents int32) RequesterApiCollectAgreementEventsRequest {
+  	r.maxEvents = &maxEvents
+  	return r
+  }
+! func (r RequesterApiCollectAgreementEventsRequest) AppSessionId(appSessionId string) RequesterApiCollectAgreementEventsRequest {
+  	r.appSessionId = &appSessionId
+  	return r
+  }
+  
+! func (r RequesterApiCollectAgreementEventsRequest) Execute() ([]AgreementEvent, *_nethttp.Response, error) {
+  	return r.ApiService.CollectAgreementEventsExecute(r)
+  }
+  
+--- 181,204 ----
+  	appSessionId   *string
+  }
+  
+! func (r ApiCollectAgreementEventsRequest) Timeout(timeout float32) ApiCollectAgreementEventsRequest {
+  	r.timeout = &timeout
+  	return r
+  }
+! func (r ApiCollectAgreementEventsRequest) AfterTimestamp(afterTimestamp time.Time) ApiCollectAgreementEventsRequest {
+  	r.afterTimestamp = &afterTimestamp
+  	return r
+  }
+! func (r ApiCollectAgreementEventsRequest) MaxEvents(maxEvents int32) ApiCollectAgreementEventsRequest {
+  	r.maxEvents = &maxEvents
+  	return r
+  }
+! func (r ApiCollectAgreementEventsRequest) AppSessionId(appSessionId string) ApiCollectAgreementEventsRequest {
+  	r.appSessionId = &appSessionId
+  	return r
+  }
+  
+! func (r ApiCollectAgreementEventsRequest) Execute() ([]AgreementEvent, *_nethttp.Response, error) {
+  	return r.ApiService.CollectAgreementEventsExecute(r)
+  }
+  
+***************
+*** 226,235 ****
+    terminated by specified party (contains signature).
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return RequesterApiCollectAgreementEventsRequest
+  */
+! func (a *RequestorApiService) CollectAgreementEvents(ctx _context.Context) RequesterApiCollectAgreementEventsRequest {
+! 	return RequesterApiCollectAgreementEventsRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+--- 226,235 ----
+    terminated by specified party (contains signature).
+  
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+!  * @return ApiCollectAgreementEventsRequest
+  */
+! func (a *RequestorApiService) CollectAgreementEvents(ctx _context.Context) ApiCollectAgreementEventsRequest {
+! 	return ApiCollectAgreementEventsRequest{
+  		ApiService: a,
+  		ctx:        ctx,
+  	}
+***************
+*** 239,245 ****
+   * Execute executes the request
+   * @return []AgreementEvent
+   */
+! func (a *RequestorApiService) CollectAgreementEventsExecute(r RequesterApiCollectAgreementEventsRequest) ([]AgreementEvent, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 239,245 ----
+   * Execute executes the request
+   * @return []AgreementEvent
+   */
+! func (a *RequestorApiService) CollectAgreementEventsExecute(r ApiCollectAgreementEventsRequest) ([]AgreementEvent, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+***************
+*** 984,996 ****
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type RequesterApiGetAgreementRequest struct {
+  	ctx         _context.Context
+  	ApiService  *RequestorApiService
+  	agreementId string
+  }
+  
+! func (r RequesterApiGetAgreementRequest) Execute() (Agreement, *_nethttp.Response, error) {
+  	return r.ApiService.GetAgreementExecute(r)
+  }
+  
+--- 984,996 ----
+  	return localVarReturnValue, localVarHTTPResponse, nil
+  }
+  
+! type ApiGetAgreementRequest struct {
+  	ctx         _context.Context
+  	ApiService  *RequestorApiService
+  	agreementId string
+  }
+  
+! func (r ApiGetAgreementRequest) Execute() (Agreement, *_nethttp.Response, error) {
+  	return r.ApiService.GetAgreementExecute(r)
+  }
+  
+***************
+*** 998,1007 ****
+   * GetAgreement GetAgreement - Fetches agreement with given agreement id.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param agreementId
+!  * @return RequesterApiGetAgreementRequest
+   */
+! func (a *RequestorApiService) GetAgreement(ctx _context.Context, agreementId string) RequesterApiGetAgreementRequest {
+! 	return RequesterApiGetAgreementRequest{
+  		ApiService:  a,
+  		ctx:         ctx,
+  		agreementId: agreementId,
+--- 998,1007 ----
+   * GetAgreement GetAgreement - Fetches agreement with given agreement id.
+   * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+   * @param agreementId
+!  * @return ApiGetAgreementRequest
+   */
+! func (a *RequestorApiService) GetAgreement(ctx _context.Context, agreementId string) ApiGetAgreementRequest {
+! 	return ApiGetAgreementRequest{
+  		ApiService:  a,
+  		ctx:         ctx,
+  		agreementId: agreementId,
+***************
+*** 1012,1018 ****
+   * Execute executes the request
+   * @return Agreement
+   */
+! func (a *RequestorApiService) GetAgreementExecute(r RequesterApiGetAgreementRequest) (Agreement, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
+--- 1012,1018 ----
+   * Execute executes the request
+   * @return Agreement
+   */
+! func (a *RequestorApiService) GetAgreementExecute(r ApiGetAgreementRequest) (Agreement, *_nethttp.Response, error) {
+  	var (
+  		localVarHTTPMethod   = _nethttp.MethodGet
+  		localVarPostBody     interface{}
